@@ -1,4 +1,4 @@
-const CACHE_NAME = "deaf-link-uganda-v3";
+const CACHE_NAME = "deaf-link-uganda-v4";
 const APP_FILES = [
   "./",
   "./index.html",
@@ -36,6 +36,29 @@ self.addEventListener("fetch", event => {
 
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
+
+  if (request.mode === "navigate") {
+    event.respondWith((async () => {
+      const cache = await caches.open(CACHE_NAME);
+      try {
+        const response = await fetch(request);
+        if (response.ok) {
+          const appPage = new URL("./index.html", self.registration.scope);
+          await cache.put(appPage, response.clone());
+        }
+        return response;
+      } catch (error) {
+        const cached = await cache.match(request);
+        if (cached) return cached;
+
+        const appPage = await cache.match(new URL("./index.html", self.registration.scope));
+        if (appPage) return appPage;
+
+        throw error;
+      }
+    })());
+    return;
+  }
 
   event.respondWith((async () => {
     const cache = await caches.open(CACHE_NAME);

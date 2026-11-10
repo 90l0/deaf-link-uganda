@@ -17,7 +17,7 @@ The site must be opened over HTTPS for installation and offline support. You can
 - **Android:** Open the website in Chrome and tap **Add to phone** when prompted. If the prompt does not appear, use the browser menu and choose **Install app** or **Add to Home screen**.
 - **iPhone/iPad:** Open the website in Safari, tap **Share**, then **Add to Home Screen**.
 
-Once installed and opened online at least once, the app shell is available offline. Sign videos are not included yet.
+Once installed and opened online at least once, the app shell is available offline. When online, the app checks the website for the latest version; when offline, it uses the most recently saved app page. Sign videos are not included yet.
 
 ## Content
 
