@@ -1,4 +1,4 @@
-const CACHE_NAME = "deaf-link-uganda-v2";
+const CACHE_NAME = "deaf-link-uganda-v3";
 const APP_FILES = [
   "./",
   "./index.html",
