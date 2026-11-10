@@ -1,16 +1,22 @@
-# Deaf Link Uganda — Standalone Setup
+# Deaf Link Uganda
 
-This folder is the single-file version of Deaf Link Uganda. The app, styles, and sample content are all in `index.html`; no build tools or package installation are needed.
+Deaf Link Uganda is a small web app that can also be installed on a phone. It includes a sign and phrase browser, app icons, and offline support. No build tools or package installation are needed.
 
-## Run locally
+## Open the web app
 
-1. Open `index.html` in a current web browser.
-2. The app works without a web server. The Atkinson Hyperlegible font is loaded from Google Fonts when internet access is available; the browser uses its system font fallback otherwise.
+After GitHub Pages finishes deploying, visit:
 
-## Publish
+<https://90l0.github.io/deaf-link-uganda/>
 
-Upload this folder to any static web host and open its `index.html` page. No server-side code is required.
+The site must be opened over HTTPS for installation and offline support. You can also serve this folder from any static HTTPS web host.
+
+## Add it to a phone
+
+- **Android:** Open the website in Chrome and tap **Add to phone** when prompted. If the prompt does not appear, use the browser menu and choose **Install app** or **Add to Home screen**.
+- **iPhone/iPad:** Open the website in Safari, tap **Share**, then **Add to Home Screen**.
+
+Once installed and opened online at least once, the app shell is available offline. Sign videos are not included yet.
 
 ## Content
 
-The signs and phrase packs are sample content embedded in `index.html`. Sign videos are placeholders until verified content is added. Have Ugandan Sign Language content reviewed by deaf signers before publishing it as instructional material.
+The signs and phrase packs are sample content embedded in `index.html`. Have Ugandan Sign Language content reviewed by deaf signers before publishing it as instructional material.

@@ -3,7 +3,13 @@
 <head>
 <meta charset="utf-8">
 <title>Deaf Link Uganda | Signs and phrases</title>
+<meta name="description" content="Find Ugandan Sign Language signs and share everyday Luganda phrases.">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1f3a6e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Deaf Link">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<link rel="manifest" href="./manifest.webmanifest">
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#fbf8f1;--surface:#fff;--ink:#1d2433;--muted:#5b6475;--line:#d9d4c7;--accent:#f2b705;--accent-ink:#1d2433;--brand:#1f3a6e;--brand-ink:#fff;
@@ -44,6 +50,9 @@ video{width:100%;display:block;aspect-ratio:16/9;background:#000}
 footer{margin-top:36px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:.95rem}
 .welcome{margin-top:12px;max-width:48ch}
 .welcome p{margin:8px 0;color:var(--muted)}
+.app-bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:12px}
+.app-bar .chip{padding:7px 14px}
+#app-status{color:var(--muted);font-size:.9rem}
 nav{padding:6px;background:var(--surface);border:1px solid var(--line);border-radius:16px}
 nav button{flex:1}
 .section-intro{margin:0 0 14px}
@@ -66,6 +75,10 @@ nav button{flex:1}
 <div class="welcome">
 <p class="tag">A little Luganda. A more connected day.</p>
 <p>Find a sign, share a phrase, or explore at your own pace. Everyone is welcome here.</p>
+</div>
+<div class="app-bar">
+<button class="chip" id="install" hidden>Add to phone</button>
+<span id="app-status" role="status" aria-live="polite"></span>
 </div>
 </header>
 <nav aria-label="Choose what you would like to do">
@@ -170,6 +183,51 @@ document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>go(b.dataset.ta
 show.onclick=()=>show.classList.remove("on");
 document.addEventListener("keydown",e=>{if(e.key==="Escape")show.classList.remove("on")});
 go("dict");
+
+/* Install support is available when hosted over HTTPS or localhost. */
+(function(){
+ const status=$("#app-status"), button=$("#install");
+ let installPrompt=null;
+ const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+ const isInstalled=window.matchMedia("(display-mode: standalone)").matches||navigator.standalone===true;
+
+ if("serviceWorker" in navigator&&window.isSecureContext){
+  navigator.serviceWorker.register("./sw.js").then(()=>navigator.serviceWorker.ready).then(()=>{
+   status.textContent=navigator.onLine?"Ready to use offline":"You’re offline. The app is ready to use.";
+  }).catch(error=>{
+   status.textContent="Offline setup couldn’t start. Try opening the app again while online.";
+   console.error("Service worker registration failed:",error);
+  });
+ }else if(!window.isSecureContext){
+  status.textContent="Open the published app over HTTPS to install it and use it offline.";
+ }else{
+  status.textContent="This browser does not support offline app setup.";
+ }
+
+ window.addEventListener("beforeinstallprompt",event=>{
+  event.preventDefault();
+  installPrompt=event;
+  button.hidden=false;
+ });
+ if(isIOS&&!isInstalled)button.hidden=false;
+ button.addEventListener("click",async()=>{
+  if(installPrompt){
+   installPrompt.prompt();
+   const choice=await installPrompt.userChoice;
+   status.textContent=choice.outcome==="accepted"?"Deaf Link was added to your phone.":"You can add Deaf Link to your phone whenever you’re ready.";
+   installPrompt=null;
+   button.hidden=true;
+  }else if(isIOS&&!isInstalled){
+   status.textContent="To add the app: tap Share, then choose Add to Home Screen.";
+  }
+ });
+ window.addEventListener("appinstalled",()=>{
+  button.hidden=true;
+  status.textContent="Deaf Link is installed and ready.";
+ });
+ window.addEventListener("offline",()=>{status.textContent="You’re offline. The app is ready to use."});
+ window.addEventListener("online",()=>{status.textContent="You’re back online."});
+})();
 </script>
 </body>
 </html>
