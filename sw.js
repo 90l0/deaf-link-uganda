@@ -1,8 +1,11 @@
-const CACHE_NAME = "deaf-link-uganda-v1";
+const CACHE_NAME = "deaf-link-uganda-v2";
 const APP_FILES = [
   "./",
   "./index.html",
   "./manifest.webmanifest",
+  "./images/deaf-link-uganda-logo.png",
+  "./icons/favicon-32.png",
+  "./icons/apple-touch-icon.png",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
   "./icons/maskable-512.png"

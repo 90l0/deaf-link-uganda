@@ -2,6 +2,8 @@
 
 Deaf Link Uganda is a small web app that can also be installed on a phone. It includes a sign and phrase browser, app icons, and offline support. No build tools or package installation are needed.
 
+The supplied Deaf Link Uganda logo appears in the app header and is used for the browser, iPhone, and installable app icons.
+
 ## Open the web app
 
 After GitHub Pages finishes deploying, visit:

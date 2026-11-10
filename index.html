@@ -8,7 +8,8 @@
 <meta name="theme-color" content="#1f3a6e">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Deaf Link">
-<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32.png">
+<link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
 <link rel="manifest" href="./manifest.webmanifest">
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -21,6 +22,8 @@ html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:18px;line-height:1.5}
 .wrap{max-width:720px;margin:0 auto;padding:20px 16px 48px}
 header{padding:8px 0 16px}
+.brand{display:flex;align-items:center;gap:16px}
+.brand-logo{display:block;width:104px;height:104px;flex:none;object-fit:contain;border-radius:22px}
 h1{font-size:2rem;line-height:1.15;margin:0;color:var(--brand)}
 .tag{margin:4px 0 0;color:var(--muted)}
 nav{display:flex;gap:8px;margin:12px 0 20px;flex-wrap:wrap}
@@ -48,7 +51,7 @@ video{width:100%;display:block;aspect-ratio:16/9;background:#000}
 #show .hint{position:absolute;bottom:calc(20px + env(safe-area-inset-bottom,0px));font-size:1rem}
 .learn p{max-width:60ch}
 footer{margin-top:36px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:.95rem}
-.welcome{margin-top:12px;max-width:48ch}
+.welcome{margin-top:8px;max-width:48ch}
 .welcome p{margin:8px 0;color:var(--muted)}
 .app-bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:12px}
 .app-bar .chip{padding:7px 14px}
@@ -64,17 +67,22 @@ nav button{flex:1}
 .phrase{transition:border-color .18s ease,transform .18s ease}
 .phrase:hover{transform:translateY(-1px)}
 .welcome-note{padding:16px;background:var(--surface);border:1px solid var(--line);border-radius:14px}
-@media(max-width:420px){nav{gap:4px;padding:4px}nav button{padding:9px 10px}}
+@media(max-width:420px){.brand{gap:12px}.brand-logo{width:82px;height:82px;border-radius:17px}h1{font-size:1.6rem}nav{gap:4px;padding:4px}nav button{padding:9px 10px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>
 <div class="wrap">
 <header>
+<div class="brand">
+<img class="brand-logo" src="./images/deaf-link-uganda-logo.png" alt="Deaf Link Uganda logo">
+<div>
 <h1>Deaf Link Uganda</h1>
 <div class="welcome">
 <p class="tag">A little Luganda. A more connected day.</p>
 <p>Find a sign, share a phrase, or explore at your own pace. Everyone is welcome here.</p>
+</div>
+</div>
 </div>
 <div class="app-bar">
 <button class="chip" id="install" hidden>Add to phone</button>
